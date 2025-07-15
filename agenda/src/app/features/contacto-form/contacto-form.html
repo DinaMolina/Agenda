@@ -1,39 +1,43 @@
-<div class="grid justify-center content-center h-screen">
-  <h1>Formulario de contacto</h1>
-  <form [formGroup]="formContacto">
-    <div class="form-floating mb-3">
-      <input formControlName="nombre" type="text" class="form-control" id="floatingInput"
-        placeholder="name@example.com">
-      <label for="floatingInput">Nombre completo</label>
-      @if (formContacto.controls['nombre'].errors) {
-      <span class="form-text text-danger">
+<div class="grid justify-center content-center h-screen bg-indigo-300">
+  <div class="p-4 bg-white shadow-lg">
 
-      </span>
-      }
+    <p class="text-indigo-800 font-bold text-3xl">Formulario de contacto</p>
+    <form [formGroup]="formContacto" class="bg-white">
+      <div class="form-floating mb-3">
+        <input formControlName="nombre" type="text" class="form-control" id="floatingInput"
+          placeholder="name@example.com">
+        <label for="floatingInput">Nombre completo</label>
+        @if (formContacto.controls['nombre'].errors) {
+        <span class="form-text text-danger">
 
-    </div>
+        </span>
+        }
 
-    <div class="form-floating mb-3">
-      <input formControlName="email" type="email" class="form-control" id="floatingInput"
-        placeholder="name@example.com">
-      <label for="floatingInput">Email</label>
-    </div>
-    <div class="form-floating mb-3">
-      <input formControlName="telefono" type="text" class="form-control" id="floatingInput"
-        placeholder="name@example.com">
-      <label for="floatingInput">Teléfono</label>
-    </div>
-    <div class="form-floating mb-3">
-      <textarea formControlName="mensaje" class="form-control" placeholder="Leave a comment here"
-        id="floatingTextarea"></textarea>
-      <label for="floatingTextarea">Mensaje</label>
-    </div>
-    <div class="form-check">
-      <input formControlName="terminos" class="form-check-input" type="checkbox" value="" id="checkDefault">
-      <label class="form-check-label" for="checkDefault">
-        Aceptar términos
-      </label>
-    </div>
-  </form>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input formControlName="email" type="email" class="form-control" id="floatingInput"
+          placeholder="name@example.com">
+        <label for="floatingInput">Email</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input formControlName="telefono" type="text" class="form-control" id="floatingInput"
+          placeholder="name@example.com">
+        <label for="floatingInput">Teléfono</label>
+      </div>
+      <div class="form-floating mb-3">
+        <textarea formControlName="mensaje" class="form-control" placeholder="Leave a comment here"
+          id="floatingTextarea"></textarea>
+        <label for="floatingTextarea">Mensaje</label>
+      </div>
+      <div class="form-check">
+        <input formControlName="terminos" class="form-check-input" type="checkbox" value="" id="checkDefault">
+        <label class="form-check-label" for="checkDefault">
+          Aceptar términos
+        </label>
+      </div>
+    </form>
+
+  </div>
 
 </div>
