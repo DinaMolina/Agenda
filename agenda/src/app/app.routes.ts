@@ -4,7 +4,8 @@ import { Home } from './features/home/home';
 import { Notfound } from './shared/notfound/notfound';
 
 export const routes: Routes = [
-   {
+
+  {
     path: '',
     component: Home
   },
@@ -16,6 +17,7 @@ export const routes: Routes = [
     path: 'not-found',
     component: Notfound
   },
+
   {
     path: '**',
     redirectTo: 'not-found'

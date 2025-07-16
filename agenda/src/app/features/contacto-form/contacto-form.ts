@@ -4,6 +4,7 @@ import { FormValidators } from '../../utils/form-validators';
 import { Navbar } from "../../shared/navbar/navbar";
 import { ListaContactos } from '../lista-contactos/lista-contactos';
 import { ContactoService } from '../../services/contactoService';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-contacto-form',
@@ -13,28 +14,34 @@ import { ContactoService } from '../../services/contactoService';
 })
 export class ContactoForm {
 
- private fb = inject(FormBuilder)
- formValidators = FormValidators
- contactoService = inject(ContactoService)
- formContacto: FormGroup = this.fb.group({
-  nombre: ['', [Validators.required, Validators.minLength(3)]],
-  email: ['', [Validators.required, Validators.pattern(this.formValidators.emailPattern)], ],
-  telefono: ['',  [Validators.maxLength(13), Validators.pattern(this.formValidators.telefonePattern)], ],
-  mensaje: ['', [Validators.required, Validators.minLength(50)]],
-  terminos: [false, Validators.requiredTrue]
- })
- alerta = signal<boolean>(false)
+  private fb = inject(FormBuilder)
+  formValidators = FormValidators
+  contactoService = inject(ContactoService)
+  formContacto: FormGroup = this.fb.group({
+    nombre: ['', [Validators.required, Validators.minLength(3)]],
+    email: ['', [Validators.required, Validators.pattern(this.formValidators.emailPattern)],],
+    telefono: ['', [Validators.maxLength(13), Validators.pattern(this.formValidators.telefonePattern)],],
+    mensaje: ['', [Validators.required, Validators.minLength(50)]],
+    terminos: [false, Validators.requiredTrue]
+  })
+  alerta = signal<boolean>(false)
 
 
- saveContacto(){
-  if (this.formContacto.invalid) {
-    this.formContacto.markAllAsTouched()
-    return;
+  saveContacto() {
+    if (this.formContacto.invalid) {
+      this.formContacto.markAllAsTouched()
+      return;
+    }
+
+    this.contactoService.addContacto(this.formContacto.value)
+    this.formContacto.reset()
+    this.mostrarAlerta()
   }
+  mostrarAlerta() {
+    this.alerta.set(true)
 
-  this.contactoService.addContacto(this.formContacto.value)
-  this.formContacto.reset()
-  this.alerta.set(true)
-
- }
+    timer(10000).subscribe(() => {
+      this.alerta.set(false)
+    });
+  }
 }
