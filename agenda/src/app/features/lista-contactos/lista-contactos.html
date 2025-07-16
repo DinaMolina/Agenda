@@ -1,0 +1,23 @@
+<ul class="list-group">
+  @if (contactoService.contactos().length > 0) {
+  @for (contacto of contactoService.contactos(); track $index) {
+  <li class="list-group-item">
+    <div class="card">
+      <div class="card-body">
+        <fa-icon class="" [icon]="faUser"></fa-icon>
+        {{contacto.nombre}} - {{contacto.email}}
+      </div>
+    </div>
+  </li>
+  }
+  }@else {
+    <div class="bg-white p-5 grid justify-center content-center ">
+
+      <fa-icon class="text-center text-8xl text-slate-500" [icon]="faUsersLine"></fa-icon>
+      <p class="text-2xl">No hay contactos agregados</p>
+    </div>
+  }
+
+
+
+</ul>

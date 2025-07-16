@@ -1,15 +1,22 @@
-<div class="grid justify-center content-center h-screen bg-indigo-300">
-  <div class="p-4 bg-white shadow-lg">
+<app-navbar></app-navbar>
+<div class="grid grid-cols-2 gap-4 justify-center content-center h-screen bg-indigo-300">
+  <div class="p-4 mx-3 bg-white shadow-lg">
+    @if (alerta() == true) {
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      El contacto fue guardado con éxito
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    }
 
     <p class="text-indigo-800 font-bold text-3xl">Formulario de contacto</p>
-    <form [formGroup]="formContacto" class="bg-white">
+    <form [formGroup]="formContacto" (ngSubmit)="saveContacto()" class="bg-white">
       <div class="form-floating mb-3">
         <input formControlName="nombre" type="text" class="form-control" id="floatingInput"
           placeholder="name@example.com">
         <label for="floatingInput">Nombre completo</label>
-        @if (formContacto.controls['nombre'].errors) {
+        @if (formValidators.isValidField(formContacto, 'nombre')) {
         <span class="form-text text-danger">
-
+          {{ formValidators.getFieldError(formContacto ,'nombre') }}
         </span>
         }
 
@@ -19,25 +26,54 @@
         <input formControlName="email" type="email" class="form-control" id="floatingInput"
           placeholder="name@example.com">
         <label for="floatingInput">Email</label>
+        @if (formValidators.isValidField(formContacto, 'email')) {
+        <span class="form-text text-danger">
+          {{ formValidators.getFieldError(formContacto ,'email') }}
+        </span>
+        }
       </div>
       <div class="form-floating mb-3">
         <input formControlName="telefono" type="text" class="form-control" id="floatingInput"
           placeholder="name@example.com">
         <label for="floatingInput">Teléfono</label>
+        @if (formValidators.isValidField(formContacto, 'telefono')) {
+        <span class="form-text text-danger">
+          {{ formValidators.getFieldError(formContacto ,'telefono') }}
+        </span>
+        }
       </div>
       <div class="form-floating mb-3">
         <textarea formControlName="mensaje" class="form-control" placeholder="Leave a comment here"
           id="floatingTextarea"></textarea>
         <label for="floatingTextarea">Mensaje</label>
+        @if (formValidators.isValidField(formContacto, 'mensaje')) {
+        <span class="form-text text-danger">
+          {{ formValidators.getFieldError(formContacto ,'mensaje') }}
+        </span>
+        }
       </div>
       <div class="form-check">
         <input formControlName="terminos" class="form-check-input" type="checkbox" value="" id="checkDefault">
         <label class="form-check-label" for="checkDefault">
           Aceptar términos
         </label>
+        @if (formValidators.isValidField(formContacto, 'terminos')) {
+        <span class="form-text text-danger">
+          {{ formValidators.getFieldError(formContacto ,'terminos') }}
+        </span>
+        }
       </div>
+      <div class="flex justify-end">
+        <button type="submit" style="background-color: #432DD8;"
+          class="btn text-white hover:bg-indigo-800">Guardar</button>
+      </div>
+
     </form>
 
+  </div>
+
+  <div>
+    <app-lista-contactos></app-lista-contactos>
   </div>
 
 </div>
